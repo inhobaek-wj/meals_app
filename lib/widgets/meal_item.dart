@@ -26,6 +26,7 @@ class MealItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: selectMeal,
+
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15)
@@ -50,7 +51,28 @@ class MealItem extends StatelessWidget {
                   ),
                 ),
 
+                Positioned(
+                  bottom: 20,
+                  right: 10,
+                  child: Container(
+                    width: 250,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 5,
+                      horizontal: 20
+                    ),
+                    color: Colors.black54,
 
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 26,
+                        color: Colors.white
+                      ),
+                      softWrap: true,
+                      overflow: TextOverflow.fade,
+                    ),
+                  ),
+                ),
               ],
             )
           ],
