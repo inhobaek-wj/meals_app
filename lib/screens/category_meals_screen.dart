@@ -1,22 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/models/meal.dart';
 
 import '../dummy_data.dart';
 import '../widgets/meal_item.dart';
 
-class CategoryMealsScreen extends StatelessWidget {
+class CategoryMealsScreen extends StatefulWidget {
 
   static const routeName = '/category-meals';
 
   @override
-  Widget build(BuildContext context) {
+  _CategoryMealsScreenState createState() => _CategoryMealsScreenState();
+}
+
+class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
+
+  String categoryTitle;
+  List<Meal> categoryMeals;
+  bool _isLoadedInitData = false;
+
+  // initState method is not suitable for use ModalRoute.of(context),
+  // because this method is called too early.
+  @override
+  void initState() {
+    // final routeArgs =
+    // ModalRoute.of(context).settings.arguments as Map<String,String>;
+
+    // final categoryId = routeArgs['id'];
+    // categoryTitle = routeArgs['title'];
+    // categoryMeals = DUMMY_MEALS.where((meal) {
+    //     return meal.categories.contains(categoryId);
+    // }).toList();
+
+    super.initState();
+  }
+
+  // this method is called whenever change is detected.
+  // so we need to prevent to load data only one time using bool value.
+  @override
+  void didChangeDependencies() {
+    if (_isLoadedInitData) {
+      return;
+    }
+
     final routeArgs =
     ModalRoute.of(context).settings.arguments as Map<String,String>;
 
     final categoryId = routeArgs['id'];
-    final categoryTitle = routeArgs['title'];
-    final categoryMeals = DUMMY_MEALS.where((meal) {
+    categoryTitle = routeArgs['title'];
+    categoryMeals = DUMMY_MEALS.where((meal) {
         return meal.categories.contains(categoryId);
     }).toList();
+    _isLoadedInitData = true;
+
+    super.didChangeDependencies();
+  }
+
+  void _removeMeal(String mealId) {
+    setState(() {
+        categoryMeals.removeWhere((item) => item.id == mealId);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
@@ -32,11 +78,11 @@ class CategoryMealsScreen extends StatelessWidget {
             duration: categoryMeals[index].duration,
             complexity: categoryMeals[index].complexity,
             affordability: categoryMeals[index].affordability,
+            removeItem: _removeMeal,
           );
         },
         itemCount: categoryMeals.length,
       ),
     );
   }
-
 }
