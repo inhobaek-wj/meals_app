@@ -14,3 +14,20 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Features
+- Navigation
+- Routing (initialRoute, routes, onGenerateRoute, onUnknownRoute) in main.dart
+
+## Used Widgets
+- InkWell (category_item.dart, meal_item.dart)
+- ListTile (main_drawer.dart)
+- Drawer (main_drawer.dart)
+- ClipRRect (meal_item.dart)
+- Positioned (meal_item.dart)
+- Padding (meal_item.dart)
+- GridView (categories_screen.dart)
+- SwitchListTile (filters_screen.dart)
+- FloatingActionButton (meal_detail_screen.dart)
+- BottomNavigationBar (tab_screen.dart)
+- BottomNavigationBarItem (tab_screen.dart)
